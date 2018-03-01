@@ -44,7 +44,7 @@ MERGED from [com.android.support:support-compat:26.0.0-alpha1] C:\Users\balogh.r
 	android:icon
 		ADDED from C:\temp\Camera\app\src\main\AndroidManifest.xml:9:9-43
 	android:theme
-		ADDED from C:\temp\Camera\app\src\main\AndroidManifest.xml:12:9-40
+		ADDED from C:\temp\Camera\app\src\main\AndroidManifest.xml:12:9-68
 activity#hu.camera.camera.MainActivity
 ADDED from C:\temp\Camera\app\src\main\AndroidManifest.xml:13:9-18:20
 	android:name

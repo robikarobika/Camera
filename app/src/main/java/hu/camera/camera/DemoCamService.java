@@ -106,8 +106,8 @@ public class DemoCamService extends HiddenCameraService {
         options.inPreferredConfig = Bitmap.Config.RGB_565;
         Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath(), options);
         //Do something with the bitmap
-        Toast.makeText(this, imageFile.getAbsolutePath(), Toast.LENGTH_LONG).show();
-        Log.d("Image capture", imageFile.length() + "");
+        //Toast.makeText(this, imageFile.getAbsolutePath(), Toast.LENGTH_LONG).show();
+        //Log.d("Image capture", imageFile.length() + "");
         stopSelf();
     }
 

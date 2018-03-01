@@ -191,7 +191,6 @@ class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     void takePictureInternal() {
-        Log.i("CameraPreview", "takePictureInternal");
         safeToTakePicture = false;
         if (mCamera != null) {
             mCamera.takePicture(null, null, new Camera.PictureCallback() {
@@ -225,6 +224,7 @@ class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
                                         mCameraCallbacks.onImageCapture(mCameraConfig.getImageFile());
                                     }
                                 });
+                                Log.i("CameraPreview", mCameraConfig.getImageFile().toString() );
                             } else {
                                 //Post error to the main thread
                                 new android.os.Handler(Looper.getMainLooper()).post(new Runnable() {

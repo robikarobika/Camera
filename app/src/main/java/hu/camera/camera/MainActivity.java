@@ -9,9 +9,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i("activity", "starting service");
         MainActivity.this.startService(new Intent(MainActivity.this,DemoCamService.class));
-        Log.i("activity", "finish");
         finish();
     }
 }

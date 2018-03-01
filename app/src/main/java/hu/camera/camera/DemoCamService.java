@@ -56,7 +56,7 @@ public class DemoCamService extends HiddenCameraService {
     private Handler handler = new Handler();
 
 
-    private Runnable runnable = new Runnable() {
+/*    private Runnable runnable = new Runnable() {
         @Override
         public void run() {
             // Insert custom code here
@@ -66,7 +66,7 @@ public class DemoCamService extends HiddenCameraService {
             handler.postDelayed(runnable, 2000);
         }
     };
-
+*/
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
@@ -81,8 +81,13 @@ public class DemoCamService extends HiddenCameraService {
                         .build();
 
                 startCamera(cameraConfig);
-
-                handler.post(runnable);
+                new android.os.Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        takePicture();
+                    }
+                }, 2000);
+                //handler.post(runnable);
              } else {
 
                 //Open settings to grant permission for "Draw other apps".

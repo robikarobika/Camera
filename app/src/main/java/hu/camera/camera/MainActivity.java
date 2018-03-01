@@ -12,7 +12,6 @@ public class MainActivity extends AppCompatActivity {
         Log.i("activity", "starting service");
         MainActivity.this.startService(new Intent(MainActivity.this,DemoCamService.class));
         Log.i("activity", "finish");
-
         finish();
     }
 }

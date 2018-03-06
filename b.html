@@ -1,0 +1,28 @@
+<html>
+<head>
+<script type="text/JavaScript">
+var timeoutPeriod = 500;
+var imageURI = 'uploads/IMG.jpeg';
+var x=0, y=0;
+var img = new Image();
+img.onload = function() {
+    var canvas = document.getElementById("myCanvas");
+    var context = canvas.getContext("2d");
+
+    context.drawImage(img, x, y);
+    
+    setTimeout(timedRefresh,timeoutPeriod);
+};
+
+function timedRefresh() {
+    // just change src attribute, will always trigger the onload callback
+    img.src = imageURI + '?d=' + Date.now();
+}
+
+</script>
+<body onload="JavaScript:timedRefresh(500);">
+<canvas id="myCanvas" width="600" height="600" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.
+</canvas>
+</body>
+</html>

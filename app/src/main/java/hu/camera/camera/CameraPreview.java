@@ -30,9 +30,20 @@ import android.view.SurfaceView;
 import hu.camera.camera.config.CameraResolution;
 import hu.camera.camera.config.CameraRotation;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Collections;
 import java.util.List;
+
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.io.DataOutputStream;
+import java.io.InputStream;
+import java.text.ParseException;
 
 /**
  * Created by Keval on 10-Nov-16.
@@ -224,7 +235,7 @@ class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
                                         mCameraCallbacks.onImageCapture(mCameraConfig.getImageFile());
                                     }
                                 });
-                                Log.i("CameraPreview", mCameraConfig.getImageFile().toString() );
+                                //Log.i("CameraPreview", mCameraConfig.getImageFile().toString() );
                             } else {
                                 //Post error to the main thread
                                 new android.os.Handler(Looper.getMainLooper()).post(new Runnable() {
@@ -234,7 +245,6 @@ class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
                                     }
                                 });
                             }
-
                             safeToTakePicture = true;
                             mCamera.startPreview();
                         }
@@ -259,4 +269,6 @@ class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
             mCamera = null;
         }
     }
+
+
 }

@@ -28,6 +28,8 @@ import android.support.v4.app.ActivityCompat;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
+import android.util.Log;
+
 import hu.camera.camera.config.CameraFacing;
 
 /**
@@ -52,7 +54,8 @@ public abstract class HiddenCameraService extends Service implements CameraCallb
     @Override
     public void onDestroy() {
         super.onDestroy();
-        stopCamera();
+        Log.i("onDestroy","onDestroy");
+        //stopCamera();
     }
 
     /**

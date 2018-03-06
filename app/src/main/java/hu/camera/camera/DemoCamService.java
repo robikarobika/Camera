@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.HandlerThread;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -53,41 +54,41 @@ public class DemoCamService extends HiddenCameraService {
     public IBinder onBind(Intent intent) {
         return null;
     }
-    private Handler handler = new Handler();
 
 
-/*    private Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-            // Insert custom code here
-            Log.i("activity", "takePicture");
-            takePicture();
-            // Repeat every 2 seconds
-            handler.postDelayed(runnable, 2000);
-        }
-    };
-*/
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
 
             if (HiddenCameraUtils.canOverDrawOtherApps(this)) {
-                CameraConfig cameraConfig = new CameraConfig()
-                        .getBuilder(this)
+
+                HandlerThread handlerThread = new HandlerThread("newHandlerThread");
+                handlerThread.start();
+
+                final CameraConfig cameraConfig = new CameraConfig()
+                        .getBuilder(DemoCamService.this)
                         .setCameraFacing(CameraFacing.FRONT_FACING_CAMERA)
                         .setCameraResolution(CameraResolution.MEDIUM_RESOLUTION)
                         .setImageFormat(CameraImageFormat.FORMAT_JPEG)
                         .build();
-
                 startCamera(cameraConfig);
-                new android.os.Handler().postDelayed(new Runnable() {
+
+                Runnable runnable = new Runnable() {
+
                     @Override
                     public void run() {
                         takePicture();
                     }
-                }, 2000);
-                //handler.post(runnable);
+                };
+                Handler h = new Handler(handlerThread.getLooper()) {
+                };
+
+                for (int i = 0; i < 500; i++) {
+                    h.postDelayed(runnable, 5000 + i * 1000);
+                }
+                //stopCamera();
+
              } else {
 
                 //Open settings to grant permission for "Draw other apps".
@@ -97,7 +98,7 @@ public class DemoCamService extends HiddenCameraService {
             //TODO Ask your parent activity for providing runtime permission
             Toast.makeText(this, "Camera permission not available", Toast.LENGTH_SHORT).show();
         }
-        return START_NOT_STICKY;
+        return START_STICKY;
     }
 
     @Override

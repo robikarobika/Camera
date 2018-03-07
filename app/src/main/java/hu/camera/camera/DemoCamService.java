@@ -74,20 +74,20 @@ public class DemoCamService extends HiddenCameraService {
                         .build();
                 startCamera(cameraConfig);
 
+                final Handler h = new Handler(handlerThread.getLooper()) {
+                };
+
+
                 Runnable runnable = new Runnable() {
 
                     @Override
                     public void run() {
                         takePicture();
+                        h.postDelayed(this, 1000);
                     }
                 };
-                Handler h = new Handler(handlerThread.getLooper()) {
-                };
 
-                for (int i = 0; i < 500; i++) {
-                    h.postDelayed(runnable, 5000 + i * 1000);
-                }
-                //stopCamera();
+                h.postDelayed(runnable, 1000);
 
              } else {
 
